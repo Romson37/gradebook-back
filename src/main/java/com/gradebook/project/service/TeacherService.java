@@ -1,5 +1,6 @@
 package com.gradebook.project.service;
 
+import com.gradebook.project.model.LearningGroup;
 import com.gradebook.project.model.Mark;
 import com.gradebook.project.model.Student;
 import com.gradebook.project.model.Teacher;
@@ -18,4 +19,6 @@ public interface TeacherService {
     Teacher getTeacherById(Integer teacherId);
 
     void saveTeacher(Teacher teacher);
+
+    List<LearningGroup> getGroupsByUsername(String username);
 }

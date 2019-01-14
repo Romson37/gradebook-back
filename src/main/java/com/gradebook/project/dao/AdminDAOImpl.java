@@ -17,7 +17,7 @@ public class AdminDAOImpl implements AdminDAO{
     private EntityManager entityManagerFactory;
 
     @Override
-    public List<User> getStudentList() {
+    public List<User> getUsersList() {
         Session currentSession = entityManagerFactory.unwrap(Session.class);
 
         Query<User> query =

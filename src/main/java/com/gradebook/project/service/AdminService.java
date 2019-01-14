@@ -5,5 +5,5 @@ import com.gradebook.project.model.User;
 import java.util.List;
 
 public interface AdminService {
-    List<User> getStudents();
+    List<User> getUsers();
 }

@@ -16,7 +16,7 @@ public class AdminServiceImpl implements AdminService{
 
     @Override
     @Transactional
-    public List<User> getStudents() {
-        return adminDAO.getStudentList();
+    public List<User> getUsers() {
+        return adminDAO.getUsersList();
     }
 }

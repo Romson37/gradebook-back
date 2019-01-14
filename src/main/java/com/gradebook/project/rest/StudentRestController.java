@@ -6,6 +6,7 @@ import com.gradebook.project.model.Mark;
 import com.gradebook.project.model.Teacher;
 import com.gradebook.project.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,9 +21,9 @@ public class StudentRestController {
 
 
 
-    @GetMapping("/myMarks/{username}")
+    @GetMapping("/{username}/myMarks")
     public List<Mark> getStudentMarks
-            (@PathVariable String username) {
+            (@PathVariable @AuthenticationPrincipal String username) {
         return studentService.getMarks(username);
     }
 
@@ -31,7 +32,7 @@ public class StudentRestController {
             (@PathVariable String groupId) {
         return studentService.getTeachersByGroup(groupId);
     }
-    @GetMapping("/myGroup/{username}")
+    @GetMapping("/{username}/myGroup")
     public List<LearningGroup> getStudentsGroup
             (@PathVariable String username) {
         return studentService.getStudentsGroup(username);

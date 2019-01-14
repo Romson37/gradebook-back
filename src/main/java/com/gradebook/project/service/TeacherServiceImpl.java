@@ -1,6 +1,7 @@
 package com.gradebook.project.service;
 
 import com.gradebook.project.dao.TeacherDAO;
+import com.gradebook.project.model.LearningGroup;
 import com.gradebook.project.model.Mark;
 import com.gradebook.project.model.Student;
 import com.gradebook.project.model.Teacher;
@@ -49,5 +50,10 @@ public class TeacherServiceImpl implements TeacherService{
     @Override
     public void saveTeacher(Teacher teacher) {
         teacherDAO.saveTeacher(teacher);
+    }
+
+    @Override
+    public List<LearningGroup> getGroupsByUsername(String username) {
+        return null;
     }
 }

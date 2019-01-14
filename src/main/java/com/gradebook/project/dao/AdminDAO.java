@@ -7,5 +7,5 @@ import java.util.List;
 
 @Repository
 public interface AdminDAO {
-    List<User> getStudentList();
+    List<User> getUsersList();
 }

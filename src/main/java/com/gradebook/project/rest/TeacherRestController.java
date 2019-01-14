@@ -1,10 +1,12 @@
 package com.gradebook.project.rest;
 
+import com.gradebook.project.model.LearningGroup;
 import com.gradebook.project.model.Mark;
 import com.gradebook.project.model.Student;
 import com.gradebook.project.model.Teacher;
 import com.gradebook.project.service.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
@@ -22,7 +24,13 @@ public class TeacherRestController {
         return teacherService.getStudents();
     }
 
-    @GetMapping ("/studentsMarks/{username}")
+    @GetMapping("/{username}")
+    public List<LearningGroup> groupsList(
+            @PathVariable @AuthenticationPrincipal String username){
+        return teacherService.getGroupsByUsername(username);
+    }
+
+    @GetMapping ("{username}/studentsMarks/")
     public List<Mark> getStudentsMarksByUsername
             (@PathVariable String username){
         return teacherService.getStudentsMarksByUsername(username);
@@ -31,7 +39,7 @@ public class TeacherRestController {
     @PostMapping (value = "/addMark/{studentId}/{teacherId}", headers = "Accept=application/json")
     public Mark addMark (@RequestBody Mark mark,
                          @PathVariable Integer studentId,
-                         @PathVariable Integer teacherId){
+                         @PathVariable @AuthenticationPrincipal Integer teacherId){
 
         //should be current teacher logged in
 
