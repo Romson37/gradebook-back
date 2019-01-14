@@ -8,7 +8,7 @@ import com.gradebook.project.model.Teacher;
 import java.util.List;
 
 public interface TeacherService {
-    List<Student> getStudents();
+    List<Student> getStudents(String groupId);
 
     List<Mark> getStudentsMarksByUsername(String username);
 

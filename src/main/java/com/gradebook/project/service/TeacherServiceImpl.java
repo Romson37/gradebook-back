@@ -19,8 +19,8 @@ public class TeacherServiceImpl implements TeacherService{
 
     @Override
     @Transactional
-    public List<Student> getStudents() {
-        return teacherDAO.getStudents();
+    public List<Student> getStudents(String groupId) {
+        return teacherDAO.getStudents(groupId);
     }
 
     @Override
@@ -48,12 +48,15 @@ public class TeacherServiceImpl implements TeacherService{
     }
 
     @Override
+    @Transactional
+
     public void saveTeacher(Teacher teacher) {
         teacherDAO.saveTeacher(teacher);
     }
 
     @Override
+    @Transactional
     public List<LearningGroup> getGroupsByUsername(String username) {
-        return null;
+        return teacherDAO.getGroupsByUsername(username);
     }
 }

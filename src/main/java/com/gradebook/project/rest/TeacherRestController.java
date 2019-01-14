@@ -1,9 +1,8 @@
 package com.gradebook.project.rest;
 
-import com.gradebook.project.model.LearningGroup;
-import com.gradebook.project.model.Mark;
-import com.gradebook.project.model.Student;
-import com.gradebook.project.model.Teacher;
+import com.gradebook.project.customAnnotations.CurrentUser;
+import com.gradebook.project.model.*;
+import com.gradebook.project.security.UserPrincipal;
 import com.gradebook.project.service.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -18,18 +17,27 @@ public class TeacherRestController {
     @Autowired
     TeacherService teacherService;
 
-    @GetMapping ("/studentsList")
-    public List<Student> getStudents() {
+    @GetMapping ("/{groupId}/studentsList")
+    public List<Student> getStudentsByGroup(@PathVariable String groupId) {
 
-        return teacherService.getStudents();
+        return teacherService.getStudents(groupId);
     }
+
 
     @GetMapping//("/{username}")
-    public List<LearningGroup> groupsList(@AuthenticationPrincipal String username){
+    public List<LearningGroup> groupsList(
+            @CurrentUser UserPrincipal user){
 
-        return teacherService.getGroupsByUsername(username);
+        String jp = user.getUsername();
+        return teacherService.getGroupsByUsername(jp);
     }
-
+//    @GetMapping("/{username}")
+//    public List<LearningGroup> groupsList(
+//            @PathVariable String username){
+//
+//
+//        return teacherService.getGroupsByUsername(username);
+//    }
     @GetMapping ("{username}/studentsMarks/")
     public List<Mark> getStudentsMarksByUsername
             (@PathVariable String username){

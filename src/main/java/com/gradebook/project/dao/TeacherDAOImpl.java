@@ -1,6 +1,7 @@
 package com.gradebook.project.dao;
 
 
+import com.gradebook.project.model.LearningGroup;
 import com.gradebook.project.model.Mark;
 import com.gradebook.project.model.Student;
 import com.gradebook.project.model.Teacher;
@@ -19,11 +20,12 @@ public class TeacherDAOImpl implements TeacherDAO{
     private EntityManager entityManagerFactory;
 
     @Override
-    public List<Student> getStudents() {
+    public List<Student> getStudents(String groupId) {
         Session currentSession =
                 entityManagerFactory.unwrap(Session.class);
         Query<Student> query =
-                currentSession.createQuery("from Student",Student.class);
+                currentSession.createQuery("select s from Student s where s.group.groupId=:var ",Student.class);
+        query.setParameter("var",groupId);
         return query.getResultList();
     }
 
@@ -68,5 +70,16 @@ public class TeacherDAOImpl implements TeacherDAO{
         Session currentSession = entityManagerFactory.unwrap(Session.class);
 
         currentSession.saveOrUpdate(teacher);
+    }
+
+    @Override
+    public List<LearningGroup> getGroupsByUsername(String username) {
+        Session currentSession =
+                entityManagerFactory.unwrap(Session.class);
+        Query<LearningGroup> query =
+                currentSession.createQuery("select g from Teacher t join t.learningGroups g join t.user u where u.username = :val",LearningGroup.class);
+        query.setParameter("val",username);
+
+        return query.getResultList();
     }
 }
