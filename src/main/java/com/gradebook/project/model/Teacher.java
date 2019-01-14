@@ -33,7 +33,7 @@ public class Teacher {
     @JsonBackReference(value = "teacher_group")
     private Set<LearningGroup> learningGroups = new HashSet<>();
 
-    @OneToOne()
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "username")
     @JsonBackReference(value = "teacher_user")
     private User user;

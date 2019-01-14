@@ -24,9 +24,9 @@ public class TeacherRestController {
         return teacherService.getStudents();
     }
 
-    @GetMapping("/{username}")
-    public List<LearningGroup> groupsList(
-            @PathVariable @AuthenticationPrincipal String username){
+    @GetMapping//("/{username}")
+    public List<LearningGroup> groupsList(@AuthenticationPrincipal String username){
+
         return teacherService.getGroupsByUsername(username);
     }
 
