@@ -45,4 +45,9 @@ public class TeacherServiceImpl implements TeacherService{
     public Teacher getTeacherById(Integer teacherId) {
         return teacherDAO.getTeacherById(teacherId);
     }
+
+    @Override
+    public void saveTeacher(Teacher teacher) {
+        teacherDAO.saveTeacher(teacher);
+    }
 }

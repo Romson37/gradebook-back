@@ -16,4 +16,6 @@ public interface TeacherDAO {
     Student getStudentById(Integer studentId);
 
     Teacher getTeacherById(Integer teacherId);
+
+    void saveTeacher(Teacher teacher);
 }

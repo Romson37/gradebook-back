@@ -33,7 +33,7 @@ public class StudentDAOImpl implements StudentDAO{
 
         Session currentSession = entityManagerFactory.unwrap(Session.class);
 
-        currentSession.save(student);
+        currentSession.saveOrUpdate(student);
     }
 
     @Override

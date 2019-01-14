@@ -62,4 +62,11 @@ public class TeacherDAOImpl implements TeacherDAO{
         query.setParameter("val",teacherId);
         return query.getSingleResult();
     }
+
+    @Override
+    public void saveTeacher(Teacher teacher) {
+        Session currentSession = entityManagerFactory.unwrap(Session.class);
+
+        currentSession.saveOrUpdate(teacher);
+    }
 }
