@@ -25,8 +25,8 @@ public class TeacherServiceImpl implements TeacherService{
 
     @Override
     @Transactional
-    public List<Mark> getStudentsMarksByUsername(String username) {
-        return teacherDAO.getStudentsMarksByUsername(username);
+    public List<Mark> getStudentsMarksByUsername(String teachersUsername, Integer id) {
+        return teacherDAO.getStudentsMarksByUsername(teachersUsername,id);
     }
 
     @Override
@@ -58,5 +58,15 @@ public class TeacherServiceImpl implements TeacherService{
     @Transactional
     public List<LearningGroup> getGroupsByUsername(String username) {
         return teacherDAO.getGroupsByUsername(username);
+    }
+
+    @Override
+    public Teacher getTeacherByUsername(String teacherUsername) {
+        return teacherDAO.getTeacherByUsername(teacherUsername);
+    }
+
+    @Override
+    public List<Mark> getMarks() {
+        return teacherDAO.getMarks();
     }
 }

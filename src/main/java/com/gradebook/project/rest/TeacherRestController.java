@@ -28,35 +28,48 @@ public class TeacherRestController {
     public List<LearningGroup> groupsList(
             @CurrentUser UserPrincipal user){
 
-        String jp = user.getUsername();
-        return teacherService.getGroupsByUsername(jp);
+        String teachersUsername = user.getUsername();
+        return teacherService.getGroupsByUsername(teachersUsername);
     }
 //    @GetMapping("/{username}")
 //    public List<LearningGroup> groupsList(
-//            @PathVariable String username){
+//           @PathVariable String username){
 //
 //
-//        return teacherService.getGroupsByUsername(username);
-//    }
-    @GetMapping ("{username}/studentsMarks/")
+//       return teacherService.getGroupsByUsername(username);
+//   }
+
+    @GetMapping ("{id}/studentsMarks")
     public List<Mark> getStudentsMarksByUsername
-            (@PathVariable String username){
-        return teacherService.getStudentsMarksByUsername(username);
+            (@PathVariable Integer id,
+            @CurrentUser UserPrincipal user){
+        String teachersUsername = user.getUsername();
+        return teacherService.getStudentsMarksByUsername(teachersUsername,id);
     }
 
-    @PostMapping (value = "/addMark/{studentId}/{teacherId}", headers = "Accept=application/json")
+//    @GetMapping ("{username}/{teacherusername}/studentsMarks")
+//    public List<Mark> getStudentsMarksByUsername
+//            (@PathVariable Integer username,
+//             @PathVariable String  teacherusername){
+//        return teacherService.getStudentsMarksByUsername(teacherusername,username);
+//    }
+    @PostMapping (value = "{studentId}/addMark", headers = "Accept=application/json")
     public Mark addMark (@RequestBody Mark mark,
                          @PathVariable Integer studentId,
-                         @PathVariable @AuthenticationPrincipal Integer teacherId){
+                         @CurrentUser UserPrincipal user){
+        String teacherUsername = user.getUsername();
+        Teacher teacher = teacherService.getTeacherByUsername(teacherUsername);
 
-        //should be current teacher logged in
-
-        Teacher teacher = teacherService.getTeacherById(teacherId);
         Student student = teacherService.getStudentById(studentId);
 
         mark.setStudent(student);
         mark.setTeacher(teacher);
         teacherService.saveMark(mark);
         return mark;
+    }
+
+    @GetMapping("/marks")
+    public List<Mark> marks(){
+        return teacherService.getMarks();
     }
 }

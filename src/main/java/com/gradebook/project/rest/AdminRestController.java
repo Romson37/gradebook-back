@@ -1,9 +1,6 @@
 package com.gradebook.project.rest;
 
-import com.gradebook.project.model.LearningGroup;
-import com.gradebook.project.model.Student;
-import com.gradebook.project.model.Teacher;
-import com.gradebook.project.model.User;
+import com.gradebook.project.model.*;
 import com.gradebook.project.repository.UserRepository;
 import com.gradebook.project.security.UserService;
 import com.gradebook.project.service.AdminService;
@@ -41,13 +38,20 @@ public class AdminRestController {
         return adminService.getUsers();
     }
 
+    @GetMapping("/{username}")
+    public Student getStudent(@PathVariable String username) {
+        return studentService.getStudentByUsername(username);
+    }
+
     @PostMapping("/{username}/addStudent")
     public Student addStudent(
             @RequestBody Student student,
             @RequestBody LearningGroup group,
             @PathVariable String username){
         User user = userRepository.findByUsername(username);
-
+        Authority authority = new Authority();
+        authority.setAuthority("ROLE_STUDENT");
+        user.getAuthorities().add(authority);
         student.setUser(user);
         student.setGroup(group);
         studentService.saveStudent(student);
@@ -59,11 +63,14 @@ public class AdminRestController {
             @RequestBody Set<LearningGroup> groups,
             @PathVariable String username){
         User user = userRepository.findByUsername(username);
-
+        Authority authority = new Authority();
+        authority.setAuthority("ROLE_TEACHER");
+        user.getAuthorities().add(authority);
         teacher.setLearningGroups(groups);
         teacher.setUser(user);
         teacherService.saveTeacher(teacher);
         return teacher;
     }
+
 
 }

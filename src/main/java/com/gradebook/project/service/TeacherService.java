@@ -10,7 +10,7 @@ import java.util.List;
 public interface TeacherService {
     List<Student> getStudents(String groupId);
 
-    List<Mark> getStudentsMarksByUsername(String username);
+    List<Mark> getStudentsMarksByUsername(String teachersUsername, Integer username);
 
     void saveMark(Mark mark);
 
@@ -21,4 +21,8 @@ public interface TeacherService {
     void saveTeacher(Teacher teacher);
 
     List<LearningGroup> getGroupsByUsername(String username);
+
+    Teacher getTeacherByUsername(String teacherUsername);
+
+    List<Mark> getMarks();
 }

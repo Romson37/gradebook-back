@@ -51,4 +51,9 @@ public class StudentServiceImpl implements StudentService{
         return studentDAO.getStudentsGroup(username);
     }
 
+    @Override
+    public Student getStudentByUsername(String username) {
+        return studentDAO.getStudentByUsername(username);
+    }
+
 }

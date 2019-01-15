@@ -17,4 +17,6 @@ public interface StudentDAO {
     List<Mark> getStudentMarks(String username);
 
     List<LearningGroup> getStudentsGroup(String username);
+
+    Student getStudentByUsername(String username);
 }
