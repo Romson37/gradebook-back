@@ -7,6 +7,7 @@ import com.gradebook.project.service.AdminService;
 import com.gradebook.project.service.StudentService;
 import com.gradebook.project.service.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
@@ -43,17 +44,17 @@ public class AdminRestController {
         return studentService.getStudentByUsername(username);
     }
 
-    @PostMapping("/{username}/addStudent")
+    @PostMapping(value = "/{username}/{groupId}/addStudent",headers = "Accept=application/json")
     public Student addStudent(
             @RequestBody Student student,
-            @RequestBody LearningGroup group,
-            @PathVariable String username){
+            @PathVariable String username,@PathVariable String groupId){
         User user = userRepository.findByUsername(username);
         Authority authority = new Authority();
+
         authority.setAuthority("ROLE_STUDENT");
         user.getAuthorities().add(authority);
         student.setUser(user);
-        student.setGroup(group);
+        student.setGroup(adminService.getGroupById(groupId));
         studentService.saveStudent(student);
         return student;
     }
@@ -63,8 +64,9 @@ public class AdminRestController {
             @RequestBody Set<LearningGroup> groups,
             @PathVariable String username){
         User user = userRepository.findByUsername(username);
-        Authority authority = new Authority();
-        authority.setAuthority("ROLE_TEACHER");
+        Authority authority = adminService.findAuthorityByName("ROLE_TEACHER");
+//        Authority authority = new Authority();
+//        authority.setAuthority("ROLE_TEACHER");
         user.getAuthorities().add(authority);
         teacher.setLearningGroups(groups);
         teacher.setUser(user);

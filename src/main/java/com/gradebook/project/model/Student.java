@@ -42,4 +42,7 @@ public class Student {
             mappedBy = "student", orphanRemoval = true,fetch = FetchType.LAZY)
     @JsonBackReference(value = "student_mark")
     private Set<Mark> marks = new HashSet<>();
+
+    public Student() {
+    }
 }

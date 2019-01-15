@@ -21,11 +21,11 @@ private String username;
 private String password;
 
 
-@ManyToMany(fetch = FetchType.LAZY)
+@ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
 @JoinTable(name = "users_authorities",
         joinColumns = @JoinColumn(name = "username"),
         inverseJoinColumns = @JoinColumn(name = "authority_id"))
-@JsonManagedReference(value = "user_authority")
+@JsonBackReference(value = "user_authority")
 private Set<Authority> authorities = new HashSet<>();
 
 @OneToOne(mappedBy = "user", cascade = CascadeType.ALL,
