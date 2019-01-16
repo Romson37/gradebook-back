@@ -61,18 +61,20 @@ public class AdminRestController {
     @PostMapping("/{username}/addTeacher")
     public Teacher addTeacher(
             @RequestBody Teacher teacher,
-            @RequestBody Set<LearningGroup> groups,
             @PathVariable String username){
         User user = userRepository.findByUsername(username);
-        Authority authority = adminService.findAuthorityByName("ROLE_TEACHER");
-//        Authority authority = new Authority();
-//        authority.setAuthority("ROLE_TEACHER");
+        Authority authority = new Authority();
+
+        authority.setAuthority("ROLE_TEACHER");
         user.getAuthorities().add(authority);
-        teacher.setLearningGroups(groups);
         teacher.setUser(user);
         teacherService.saveTeacher(teacher);
         return teacher;
     }
 
+    @GetMapping("/groups")
+    public List<LearningGroup> groups (){
+        return adminService.getGroups();
+    }
 
 }

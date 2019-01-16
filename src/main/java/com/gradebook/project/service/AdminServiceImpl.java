@@ -31,4 +31,9 @@ public class AdminServiceImpl implements AdminService{
     public Authority findAuthorityByName(String role_teacher) {
         return adminDAO.findAuthorityByName(role_teacher);
     }
+
+    @Override
+    public List<LearningGroup> getGroups() {
+        return adminDAO.getGroups();
+    }
 }

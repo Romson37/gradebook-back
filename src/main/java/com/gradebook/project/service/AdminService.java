@@ -12,4 +12,6 @@ public interface AdminService {
     LearningGroup getGroupById(String groupId);
 
     Authority findAuthorityByName(String role_teacher);
+
+    List<LearningGroup> getGroups();
 }
