@@ -82,4 +82,12 @@ public class AdminRestController {
         return adminService.getGroups();
     }
 
+    @PostMapping("/{groupId}/addGroupToTeacher")
+    public Teacher updateTeacherWithGroup(@RequestBody Teacher teacher, @PathVariable String groupId){
+
+        teacher.getLearningGroups().add(adminService.getGroupById(groupId));
+        teacherService.saveTeacher(teacher);
+        return teacher;
+    }
+
 }
