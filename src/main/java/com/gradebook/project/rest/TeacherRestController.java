@@ -24,20 +24,14 @@ public class TeacherRestController {
     }
 
 
-    @GetMapping//("/{username}")
+    @GetMapping
     public List<LearningGroup> groupsList(
             @CurrentUser UserPrincipal user){
 
         String teachersUsername = user.getUsername();
         return teacherService.getGroupsByUsername(teachersUsername);
     }
-//    @GetMapping("/{username}")
-//    public List<LearningGroup> groupsList(
-//           @PathVariable String username){
-//
-//
-//       return teacherService.getGroupsByUsername(username);
-//   }
+
 
     @GetMapping ("{id}/studentsMarks")
     public List<Mark> getStudentsMarksByUsername
@@ -47,12 +41,6 @@ public class TeacherRestController {
         return teacherService.getStudentsMarksByUsername(teachersUsername,id);
     }
 
-//    @GetMapping ("{username}/{teacherusername}/studentsMarks")
-//    public List<Mark> getStudentsMarksByUsername
-//            (@PathVariable Integer username,
-//             @PathVariable String  teacherusername){
-//        return teacherService.getStudentsMarksByUsername(teacherusername,username);
-//    }
     @PostMapping (value = "{studentId}/addMark", headers = "Accept=application/json")
     public Mark addMark (@RequestBody Mark mark,
                          @PathVariable Integer studentId,

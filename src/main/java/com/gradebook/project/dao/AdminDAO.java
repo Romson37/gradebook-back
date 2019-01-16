@@ -2,6 +2,7 @@ package com.gradebook.project.dao;
 
 import com.gradebook.project.model.Authority;
 import com.gradebook.project.model.LearningGroup;
+import com.gradebook.project.model.Teacher;
 import com.gradebook.project.model.User;
 import org.springframework.stereotype.Repository;
 
@@ -16,4 +17,6 @@ public interface AdminDAO {
     Authority findAuthorityByName(String role_teacher);
 
     List<LearningGroup> getGroups();
+
+    List<Teacher> getTeachers();
 }

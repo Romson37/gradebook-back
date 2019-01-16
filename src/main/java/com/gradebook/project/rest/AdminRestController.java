@@ -39,6 +39,11 @@ public class AdminRestController {
         return adminService.getUsers();
     }
 
+    @GetMapping("/teachersList")
+    public List<Teacher> teachers(){
+        return adminService.getTeachers();
+    }
+
     @GetMapping("/{username}")
     public Student getStudent(@PathVariable String username) {
         return studentService.getStudentByUsername(username);

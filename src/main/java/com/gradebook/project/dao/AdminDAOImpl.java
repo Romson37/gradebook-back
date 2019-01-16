@@ -1,9 +1,6 @@
 package com.gradebook.project.dao;
 
-import com.gradebook.project.model.Authority;
-import com.gradebook.project.model.LearningGroup;
-import com.gradebook.project.model.Student;
-import com.gradebook.project.model.User;
+import com.gradebook.project.model.*;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,8 +51,18 @@ public class AdminDAOImpl implements AdminDAO{
         Session currentSession = entityManagerFactory.unwrap(Session.class);
 
         Query<LearningGroup> query =
-                currentSession.createQuery("FROM LearningGroups", LearningGroup.class);
+                currentSession.createQuery("FROM LearningGroup", LearningGroup.class);
 
         return query.getResultList();    }
+
+    @Override
+    public List<Teacher> getTeachers() {
+        Session currentSession = entityManagerFactory.unwrap(Session.class);
+
+        Query<Teacher> query =
+                currentSession.createQuery("from Teacher", Teacher.class);
+
+        return query.getResultList();
     }
+
 }
