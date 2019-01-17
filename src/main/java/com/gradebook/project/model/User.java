@@ -13,30 +13,30 @@ import java.util.Set;
 @Table(name="users")
 public class User {
 
-@Id
-@Column(name="username")
-private String username;
+    @Id
+    @Column(name="username")
+    private String username;
 
-@Column(name="password")
-private String password;
+    @Column(name="password")
+    private String password;
 
 
-@ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-@JoinTable(name = "users_authorities",
-        joinColumns = @JoinColumn(name = "username"),
-        inverseJoinColumns = @JoinColumn(name = "authority_id"))
-@JsonBackReference(value = "user_authority")
-private Set<Authority> authorities = new HashSet<>();
+    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @JoinTable(name = "users_authorities",
+            joinColumns = @JoinColumn(name = "username"),
+            inverseJoinColumns = @JoinColumn(name = "authority_id"))
+    @JsonBackReference(value = "user_authority")
+    private Set<Authority> authorities = new HashSet<>();
 
-@OneToOne(mappedBy = "user", cascade = CascadeType.ALL,
-        fetch = FetchType.LAZY, optional = false)
-@JsonManagedReference(value = "student_user")
-private Student student;
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY, optional = false)
+    @JsonManagedReference(value = "student_user")
+    private Student student;
 
-@OneToOne(mappedBy = "user", cascade = CascadeType.ALL,
-        fetch = FetchType.LAZY, optional = false)
-@JsonManagedReference(value = "teacher_user")
-private Teacher teacher;
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY, optional = false)
+    @JsonManagedReference(value = "teacher_user")
+    private Teacher teacher;
 
     public User(String username, String password) {
         this.username = username;

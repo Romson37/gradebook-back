@@ -65,4 +65,11 @@ public class AdminDAOImpl implements AdminDAO{
         return query.getResultList();
     }
 
+    @Override
+    public void saveGroup(LearningGroup group) {
+        Session currentSession = entityManagerFactory.unwrap(Session.class);
+
+        currentSession.saveOrUpdate(group);
+    }
+
 }

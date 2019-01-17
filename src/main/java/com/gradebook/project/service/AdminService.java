@@ -17,4 +17,6 @@ public interface AdminService {
     List<LearningGroup> getGroups();
 
     List<Teacher> getTeachers();
+
+    void saveGroup(LearningGroup group);
 }

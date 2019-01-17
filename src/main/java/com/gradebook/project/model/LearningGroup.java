@@ -33,4 +33,3 @@ public class LearningGroup {
     @JsonBackReference(value = "teacher_group")
     private List<Teacher> teachers = new ArrayList<>();
 }
-

@@ -7,13 +7,9 @@ import com.gradebook.project.service.AdminService;
 import com.gradebook.project.service.StudentService;
 import com.gradebook.project.service.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Set;
-
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/adminPanel")
@@ -82,12 +78,20 @@ public class AdminRestController {
         return adminService.getGroups();
     }
 
-    @PostMapping("/{groupId}/addGroupToTeacher")
-    public Teacher updateTeacherWithGroup(@RequestBody Teacher teacher, @PathVariable String groupId){
+    @PutMapping("/{username}/{groupId}/addGroupToTeacher")
+    public LearningGroup addTeacherToGroup(@RequestBody LearningGroup learningGroup, @PathVariable String username, @PathVariable String groupId) {
 
-        teacher.getLearningGroups().add(adminService.getGroupById(groupId));
-        teacherService.saveTeacher(teacher);
-        return teacher;
+        Teacher currentTeacher =
+                teacherService.getTeacherByUsername(username);
+
+        LearningGroup group = adminService.getGroupById(groupId);
+
+        group.setGroupId(groupId);
+
+        group.getTeachers().add(currentTeacher);
+
+        adminService.saveGroup(group);
+
+        return group;
     }
-
 }

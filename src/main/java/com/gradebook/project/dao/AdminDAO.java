@@ -19,4 +19,6 @@ public interface AdminDAO {
     List<LearningGroup> getGroups();
 
     List<Teacher> getTeachers();
+
+    void saveGroup(LearningGroup group);
 }

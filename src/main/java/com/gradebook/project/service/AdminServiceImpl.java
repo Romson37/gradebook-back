@@ -42,4 +42,10 @@ public class AdminServiceImpl implements AdminService{
     public List<Teacher> getTeachers() {
         return adminDAO.getTeachers();
     }
+
+    @Override
+    @Transactional
+    public void saveGroup(LearningGroup group) {
+        adminDAO.saveGroup(group);
+    }
 }
