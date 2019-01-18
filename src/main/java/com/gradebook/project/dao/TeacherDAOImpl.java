@@ -48,7 +48,7 @@ public class TeacherDAOImpl implements TeacherDAO{
     public void saveMark(Mark mark) {
         Session currentSession =
                 entityManagerFactory.unwrap(Session.class);
-        currentSession.save(mark);
+        currentSession.saveOrUpdate(mark);
     }
 
     @Override

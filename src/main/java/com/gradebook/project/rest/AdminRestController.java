@@ -78,11 +78,11 @@ public class AdminRestController {
         return adminService.getGroups();
     }
 
-    @PutMapping("/{username}/{groupId}/addGroupToTeacher")
-    public LearningGroup addTeacherToGroup(@RequestBody LearningGroup learningGroup, @PathVariable String username, @PathVariable String groupId) {
+    @PutMapping("/{id}/{groupId}/addTeacherToGroup")
+    public LearningGroup addTeacherToGroup(@PathVariable Integer id, @PathVariable String groupId) {
 
         Teacher currentTeacher =
-                teacherService.getTeacherByUsername(username);
+                teacherService.getTeacherById(id);
 
         LearningGroup group = adminService.getGroupById(groupId);
 

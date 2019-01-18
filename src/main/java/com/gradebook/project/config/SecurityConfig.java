@@ -92,8 +92,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .antMatchers("/user/checkUsernameAvailability")
                 .permitAll()
-                .antMatchers("/adminPanel/**","/studentPanel/**","/teacherPanel/**")
-                .permitAll()
+                .antMatchers("/adminPanel/**")
+                .access("hasRole('ROLE_ADMIN')")
+                .antMatchers("/studentPanel/**")
+                .access("hasRole('ROLE_STUDENT')")
+                .antMatchers("/teacherPanel/**")
+                .access("hasRole('ROLE_TEACHER')")
                 .anyRequest()
                 .authenticated();
 

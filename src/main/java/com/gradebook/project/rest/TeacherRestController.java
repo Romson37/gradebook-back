@@ -41,14 +41,14 @@ public class TeacherRestController {
         return teacherService.getStudentsMarksByUsername(teachersUsername,id);
     }
 
-    @PostMapping (value = "{studentId}/addMark", headers = "Accept=application/json")
+    @PostMapping (value = "/{id}/addMark", headers = "Accept=application/json")
     public Mark addMark (@RequestBody Mark mark,
-                         @PathVariable Integer studentId,
+                         @PathVariable Integer id,
                          @CurrentUser UserPrincipal user){
         String teacherUsername = user.getUsername();
         Teacher teacher = teacherService.getTeacherByUsername(teacherUsername);
 
-        Student student = teacherService.getStudentById(studentId);
+        Student student = teacherService.getStudentById(id);
 
         mark.setStudent(student);
         mark.setTeacher(teacher);
