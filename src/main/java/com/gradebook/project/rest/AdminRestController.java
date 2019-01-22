@@ -1,6 +1,7 @@
 package com.gradebook.project.rest;
 
 import com.gradebook.project.model.*;
+import com.gradebook.project.repository.AuthorityRepository;
 import com.gradebook.project.repository.UserRepository;
 import com.gradebook.project.security.UserService;
 import com.gradebook.project.service.AdminService;
@@ -30,6 +31,8 @@ public class AdminRestController {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private AuthorityRepository authorityRepository;
     @GetMapping
     public List<User> getUsers() {
         return adminService.getUsers();
@@ -50,10 +53,8 @@ public class AdminRestController {
             @RequestBody Student student,
             @PathVariable String username,@PathVariable String groupId){
         User user = userRepository.findByUsername(username);
-        Authority authority = new Authority();
 
-        authority.setAuthority("ROLE_STUDENT");
-        user.getAuthorities().add(authority);
+        user.getAuthorities().add(authorityRepository.findByAuthority("ROLE_STUDENT"));
         student.setUser(user);
         student.setGroup(adminService.getGroupById(groupId));
         studentService.saveStudent(student);
@@ -64,10 +65,8 @@ public class AdminRestController {
             @RequestBody Teacher teacher,
             @PathVariable String username){
         User user = userRepository.findByUsername(username);
-        Authority authority = new Authority();
 
-        authority.setAuthority("ROLE_TEACHER");
-        user.getAuthorities().add(authority);
+        user.getAuthorities().add(authorityRepository.findByAuthority("ROLE_TEACHER"));
         teacher.setUser(user);
         teacherService.saveTeacher(teacher);
         return teacher;

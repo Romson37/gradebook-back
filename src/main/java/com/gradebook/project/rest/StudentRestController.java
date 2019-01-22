@@ -1,9 +1,11 @@
 package com.gradebook.project.rest;
 
 
+import com.gradebook.project.customAnnotations.CurrentUser;
 import com.gradebook.project.model.LearningGroup;
 import com.gradebook.project.model.Mark;
 import com.gradebook.project.model.Teacher;
+import com.gradebook.project.security.UserPrincipal;
 import com.gradebook.project.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -11,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/studentPanel")
 public class StudentRestController {
@@ -21,9 +23,11 @@ public class StudentRestController {
 
 
 
-    @GetMapping("/{username}/myMarks")
+    @GetMapping("/myMarks")
     public List<Mark> getStudentMarks
-            (@PathVariable @AuthenticationPrincipal String username) {
+            (@CurrentUser UserPrincipal user) {
+        String username;
+        username = user.getUsername();
         return studentService.getMarks(username);
     }
 
