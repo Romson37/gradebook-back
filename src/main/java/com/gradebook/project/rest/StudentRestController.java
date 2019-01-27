@@ -31,6 +31,15 @@ public class StudentRestController {
         return studentService.getMarks(username);
     }
 
+    @GetMapping ("{id}/myMarks")
+    public List<Mark> getStudentsMarksByUsername
+            (@PathVariable Integer id,
+             @CurrentUser UserPrincipal user){
+        String studentsUsername = user.getUsername();
+        return studentService.getMarksByTeacherId(studentsUsername,id);
+    }
+
+
     @GetMapping("/myTeachers/{groupId}")
     public List<Teacher> getStudentsTeachers
             (@PathVariable String groupId) {

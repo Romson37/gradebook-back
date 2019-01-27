@@ -56,4 +56,9 @@ public class StudentServiceImpl implements StudentService{
         return studentDAO.getStudentByUsername(username);
     }
 
+    @Override
+    public List<Mark> getMarksByTeacherId(String studentsUsername, Integer id) {
+        return studentDAO.getMarksByTeacherId(studentsUsername,id);
+    }
+
 }

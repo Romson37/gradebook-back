@@ -23,4 +23,6 @@ public interface StudentService {
     List<LearningGroup> getStudentsGroup(String username);
 
     Student getStudentByUsername(String username);
+
+    List<Mark> getMarksByTeacherId(String studentsUsername, Integer id);
 }

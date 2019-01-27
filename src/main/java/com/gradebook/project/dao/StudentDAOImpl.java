@@ -94,6 +94,21 @@ public class StudentDAOImpl implements StudentDAO{
         return query.getSingleResult();
     }
 
+    @Override
+    public List<Mark> getMarksByTeacherId(String studentsUsername, Integer id) {
+        Session currentSession = entityManagerFactory.unwrap(Session.class);
+        Query<Mark> query =
+                currentSession.createQuery(
+                        "select m from Mark m join m.student s " +
+                                "join s.user us " +
+                                "join m.teacher t " +
+                                "join t.user ut " +
+                                "where s.teacherId=:var1 and ut.username=:var2",Mark.class);
+        query.setParameter("var1",id);
+        query.setParameter("var2",studentsUsername);
+        return query.getResultList();
+    }
+
 //select g.teachers from Group g join g.students s join User u " +
 //                        "where u.username=:value
 
