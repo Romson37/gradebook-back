@@ -8,7 +8,6 @@ import com.gradebook.project.model.Teacher;
 import com.gradebook.project.security.UserPrincipal;
 import com.gradebook.project.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,8 +19,6 @@ public class StudentRestController {
 
     @Autowired
     private StudentService studentService;
-
-
 
     @GetMapping("/myMarks")
     public List<Mark> getStudentMarks
@@ -39,15 +36,17 @@ public class StudentRestController {
         return studentService.getMarksByTeacherId(studentsUsername,id);
     }
 
-
     @GetMapping("/myTeachers/{groupId}")
     public List<Teacher> getStudentsTeachers
             (@PathVariable String groupId) {
         return studentService.getTeachersByGroup(groupId);
     }
-    @GetMapping("/{username}/myGroup")
+
+    @GetMapping("/myGroup")
     public List<LearningGroup> getStudentsGroup
-            (@PathVariable String username) {
+            (@CurrentUser UserPrincipal user) {
+        String username;
+        username = user.getUsername();
         return studentService.getStudentsGroup(username);
     }
 

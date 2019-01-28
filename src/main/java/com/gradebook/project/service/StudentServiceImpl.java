@@ -33,11 +33,7 @@ public class StudentServiceImpl implements StudentService{
         return studentDAO.getTeachers(groupId);
     }
 
-    @Override
-    @Transactional
-    public LearningGroup getUserGroupByUsername(String username) {
-        return studentDAO.getUserGroupByUsername(username);
-    }
+
 
     @Override
     @Transactional

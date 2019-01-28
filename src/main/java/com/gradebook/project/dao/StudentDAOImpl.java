@@ -102,8 +102,8 @@ public class StudentDAOImpl implements StudentDAO{
                         "select m from Mark m join m.student s " +
                                 "join s.user us " +
                                 "join m.teacher t " +
-                                "join t.user ut " +
-                                "where s.teacherId=:var1 and ut.username=:var2",Mark.class);
+                                "join s.user us " +
+                                "where t.teachersId=:var1 and us.username=:var2",Mark.class);
         query.setParameter("var1",id);
         query.setParameter("var2",studentsUsername);
         return query.getResultList();

@@ -3,7 +3,6 @@ package com.gradebook.project.rest;
 import com.gradebook.project.model.*;
 import com.gradebook.project.repository.AuthorityRepository;
 import com.gradebook.project.repository.UserRepository;
-import com.gradebook.project.security.UserService;
 import com.gradebook.project.service.AdminService;
 import com.gradebook.project.service.StudentService;
 import com.gradebook.project.service.TeacherService;
@@ -21,9 +20,6 @@ public class AdminRestController {
 
     @Autowired
     private StudentService studentService;
-
-    @Autowired
-    private UserService userService;
 
     @Autowired
     private TeacherService teacherService;

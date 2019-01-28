@@ -5,7 +5,6 @@ import com.gradebook.project.model.*;
 import com.gradebook.project.security.UserPrincipal;
 import com.gradebook.project.service.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
@@ -63,3 +62,27 @@ public class TeacherRestController {
         return teacherService.getMarks();
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
